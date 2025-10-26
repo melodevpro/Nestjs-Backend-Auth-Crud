@@ -1,12 +1,9 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Delete, Get, Post, Put, Patch } from '@nestjs/common';
 import { TareasService } from './tareas.service';
 
-@Controller({})
+@Controller('/tareas')
 export class TareasController {
-    tareasService: TareasService;
-    constructor(tareasService: TareasService) {
-        this.tareasService = tareasService;
-    }
+    constructor(private tareasService: TareasService) {}
 
     @Get('/')
     index() {
@@ -14,12 +11,28 @@ export class TareasController {
         return 'Pagina inicial';
     }
 
-    @Get('/tareas')
+    @Get()
     getAllTareas() {
         return this.tareasService.getTareas();
     }
 
+    @Post()
+    createTareas(){
+        return this.tareasService.createTareas();
+    }
 
+    @Put()
+    updateTareas(){
+        return this.tareasService.updateTareas();
+    }
 
+    @Delete()
+    deleteTareas(){
+        return this.tareasService.deleteTareas();
+    }
 
+    @Patch()
+    patchTareasStatus(){
+        return this.tareasService.patchTareasStatus();
+    }
 }
